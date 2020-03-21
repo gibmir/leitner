@@ -9,6 +9,7 @@
     <version>0.1</version>
     <modules>
         <module>leitner-card</module>
+        <module>leitner-box</module>
     </modules>
     <properties>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
