@@ -1,30 +1,41 @@
-package leitner.card.services;
+package leitner.card.services.integration;
 
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import leitner.card.Card;
+import leitner.card.services.CardService;
+import leitner.card.services.integration.containers.MongoDbContainer;
+import leitner.card.services.mongo.MongoCardAdapter;
+import leitner.card.services.mongo.MongoCardService;
+import org.bson.Document;
 import org.junit.jupiter.api.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.Optional;
 
+import static leitner.card.services.integration.containers.MongoDbContainer.DEFAULT_MONGO_PORT;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CardServiceTest {
 
-    public static final String PERSISTENCE_UNIT_NAME = "card-service-test";
     public static final String EXPECTED_QUESTION = "year";
     public static final String EXPECTED_ANSWER = "2020";
     private static CardService cardService;
     public static final long ID = 1L;
-    static StringBuilder builder = new StringBuilder();
+    private static MongoDbContainer mongoDbContainer;
 
     @BeforeAll
     static void beforeAll() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        cardService = new CardService(entityManager);
+        mongoDbContainer = new MongoDbContainer();
+        mongoDbContainer.withExposedPorts(DEFAULT_MONGO_PORT);
+        mongoDbContainer.start();
+        final MongoClient mongoClient = new MongoClient("localhost", mongoDbContainer.getPort());
+        final MongoDatabase leitner = mongoClient.getDatabase("leitner");
+        final MongoCollection<Document> cards = leitner.getCollection("cards");
+        final Card card = new Card(ID, EXPECTED_QUESTION, EXPECTED_ANSWER);
+        cards.insertOne(MongoCardAdapter.toDocument(card));
+        cardService = new MongoCardService(cards);
     }
 
     @Test
@@ -73,5 +84,10 @@ public class CardServiceTest {
     @AfterAll
     static void afterAll() throws Exception {
         cardService.close();
+        if (mongoDbContainer != null) {
+            if (mongoDbContainer.isRunning()) {
+                mongoDbContainer.stop();
+            }
+        }
     }
 }

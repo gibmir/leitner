@@ -1,13 +1,7 @@
 package leitner.card;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "CARDS")
 public class Card {
-    @Id
     private Long id;
     private String question;
     private String answer;
