@@ -3,7 +3,7 @@ package leitner.card.services.integration;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import leitner.card.Card;
+import leitner.card.model.Card;
 import leitner.card.services.CardService;
 import leitner.card.services.integration.containers.MongoDbContainer;
 import leitner.card.services.mongo.MongoCardAdapter;

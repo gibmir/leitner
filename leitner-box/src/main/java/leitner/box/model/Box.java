@@ -1,6 +1,6 @@
-package leitner.box;
+package leitner.box.model;
 
-import leitner.box.folder.Folder;
+import leitner.box.model.folder.Folder;
 
 import javax.persistence.*;
 import java.util.Set;

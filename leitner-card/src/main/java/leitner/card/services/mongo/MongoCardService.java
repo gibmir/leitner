@@ -2,7 +2,7 @@ package leitner.card.services.mongo;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.UpdateOptions;
-import leitner.card.Card;
+import leitner.card.model.Card;
 import leitner.card.services.CardService;
 import org.bson.Document;
 

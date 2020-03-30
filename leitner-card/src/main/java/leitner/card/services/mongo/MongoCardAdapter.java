@@ -1,6 +1,6 @@
 package leitner.card.services.mongo;
 
-import leitner.card.Card;
+import leitner.card.model.Card;
 import org.bson.Document;
 
 import java.util.HashMap;

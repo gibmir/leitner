@@ -7,9 +7,9 @@
     <persistence-unit name="leitner.box">
         <description>Box entity manager</description>
         <!-- add classes -->
-        <class>leitner.box.Box</class>
-        <class>leitner.box.folder.Folder</class>
-        <class>leitner.box.folder.card.Card</class>
+        <class>leitner.box.model.Box</class>
+        <class>leitner.box.model.folder.Folder</class>
+        <class>leitner.box.model.folder.card.Card</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.c3p0.min_size" value="5"/>

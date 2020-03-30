@@ -7,9 +7,9 @@
     <persistence-unit name="box-service-test" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!-- add classes -->
-        <class>leitner.box.Box</class>
-        <class>leitner.box.folder.Folder</class>
-        <class>leitner.box.folder.card.Card</class>
+        <class>leitner.box.model.Box</class>
+        <class>leitner.box.model.folder.Folder</class>
+        <class>leitner.box.model.folder.card.Card</class>
         <properties>
             <!-- Configuring JDBC properties -->
             <property name="javax.persistence.jdbc.url"

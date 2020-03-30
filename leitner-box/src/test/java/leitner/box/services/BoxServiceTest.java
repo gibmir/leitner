@@ -1,8 +1,8 @@
 package leitner.box.services;
 
-import leitner.box.Box;
-import leitner.box.folder.Folder;
-import leitner.box.folder.card.Card;
+import leitner.box.model.Box;
+import leitner.box.model.folder.Folder;
+import leitner.box.model.folder.card.Card;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;

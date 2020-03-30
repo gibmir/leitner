@@ -1,7 +1,7 @@
-package leitner.box.folder;
+package leitner.box.model.folder;
 
-import leitner.box.Box;
-import leitner.box.folder.card.Card;
+import leitner.box.model.Box;
+import leitner.box.model.folder.card.Card;
 
 import javax.persistence.*;
 import java.util.Objects;

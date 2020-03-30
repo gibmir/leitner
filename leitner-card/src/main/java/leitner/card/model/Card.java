@@ -1,4 +1,4 @@
-package leitner.card;
+package leitner.card.model;
 
 
 public class Card {

@@ -1,6 +1,6 @@
 package leitner.card.services;
 
-import leitner.card.Card;
+import leitner.card.model.Card;
 
 import java.util.Optional;
 

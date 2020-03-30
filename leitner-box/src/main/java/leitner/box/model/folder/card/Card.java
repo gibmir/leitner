@@ -1,6 +1,6 @@
-package leitner.box.folder.card;
+package leitner.box.model.folder.card;
 
-import leitner.box.folder.Folder;
+import leitner.box.model.folder.Folder;
 
 import javax.persistence.*;
 

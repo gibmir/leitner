@@ -1,6 +1,6 @@
 package leitner.box.services;
 
-import leitner.box.Box;
+import leitner.box.model.Box;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
