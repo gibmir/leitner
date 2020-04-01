@@ -30,5 +30,9 @@
             <groupId>leitner</groupId>
             <artifactId>microlit-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>leitner</groupId>
+            <artifactId>leitner-card-api</artifactId>
+        </dependency>
     </dependencies>
 </project>

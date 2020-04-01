@@ -3,6 +3,7 @@ package microlit.json.rpc.api.body.response.error;
 import microlit.json.rpc.api.body.JsonRpcIdSupplier;
 import microlit.json.rpc.api.body.response.AbstractIdentifiableResponse;
 import microlit.json.rpc.api.body.response.JsonRpcResponse;
+import microlit.json.rpc.api.processor.JsonRpcResponseProcessor;
 
 import javax.json.bind.annotation.JsonbProperty;
 
@@ -41,5 +42,10 @@ public class ErrorResponse extends AbstractIdentifiableResponse implements JsonR
                 "jsonRpcError=" + jsonRpcError +
                 ", jsonRpcProtocolVersion='" + jsonRpcProtocolVersion + '\'' +
                 '}';
+    }
+
+    @Override
+    public void processWith(JsonRpcResponseProcessor jsonRpcResponseProcessor) {
+        jsonRpcResponseProcessor.handle(this);
     }
 }

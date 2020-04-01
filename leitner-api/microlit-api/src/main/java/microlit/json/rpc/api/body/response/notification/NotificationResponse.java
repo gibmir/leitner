@@ -2,6 +2,7 @@ package microlit.json.rpc.api.body.response.notification;
 
 import microlit.json.rpc.api.body.AbstractJsonRpcBody;
 import microlit.json.rpc.api.body.response.JsonRpcResponse;
+import microlit.json.rpc.api.processor.JsonRpcResponseProcessor;
 
 public class NotificationResponse extends AbstractJsonRpcBody implements JsonRpcResponse {
     private String methodName;
@@ -29,5 +30,10 @@ public class NotificationResponse extends AbstractJsonRpcBody implements JsonRpc
                 " jsonrpc='" + jsonRpcProtocolVersion + '\'' +
                 ", method='" + methodName + '\'' +
                 '}';
+    }
+
+    @Override
+    public void processWith(JsonRpcResponseProcessor jsonRpcResponseProcessor) {
+        jsonRpcResponseProcessor.handle(this);
     }
 }

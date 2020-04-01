@@ -15,7 +15,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.Method;
 
-public class ServiceFactory {
+public class JsonRpcRequestProcessorFactory {
 
     public static <T> JsonRpcRequestProcessor createProcessor(Class<T> serviceInterface,
                                                               T service) throws NoSuchMethodException, IllegalAccessException {

@@ -134,6 +134,11 @@
                 <artifactId>javax.json</artifactId>
                 <version>${javax.json.version}</version>
             </dependency>
+            <dependency>
+                <groupId>leitner</groupId>
+                <artifactId>leitner-card-api</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>

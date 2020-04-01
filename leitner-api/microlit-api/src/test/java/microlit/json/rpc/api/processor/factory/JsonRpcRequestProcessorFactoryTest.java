@@ -11,12 +11,12 @@ import static microlit.json.rpc.api.environment.TestEnvironment.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ServiceFactoryTest {
+public class JsonRpcRequestProcessorFactoryTest {
     private static JsonRpcRequestProcessor processor;
 
     @BeforeAll
     static void beforeAll() throws NoSuchMethodException, IllegalAccessException {
-        processor = ServiceFactory.createProcessor(TestApi.class, new TestApiImpl());
+        processor = JsonRpcRequestProcessorFactory.createProcessor(TestApi.class, new TestApiImpl());
     }
 
     @Test
@@ -57,6 +57,4 @@ public class ServiceFactoryTest {
         final JsonRpcResponse responseToRequestWithIncorrectArgs = processor.process(INCORRECT_ARGS_NOTIFICATION);
         assertNotNull(responseToRequestWithIncorrectArgs);
     }
-
-
 }

@@ -6,7 +6,7 @@ import microlit.json.rpc.api.body.request.JsonRpcRequest;
 import microlit.json.rpc.api.body.response.JsonRpcResponse;
 import microlit.json.rpc.api.processor.JsonRpcRequestProcessor;
 
-public class PositionalRequest extends AbstractJsonRpcRequest implements JsonRpcRequest<PositionalRequest>, JsonRpcIdSupplier {
+public class PositionalRequest extends AbstractJsonRpcRequest implements JsonRpcRequest, JsonRpcIdSupplier {
     private String id;
 
     public PositionalRequest() {

@@ -5,7 +5,7 @@ import microlit.json.rpc.api.body.request.JsonRpcRequest;
 import microlit.json.rpc.api.body.response.JsonRpcResponse;
 import microlit.json.rpc.api.processor.JsonRpcRequestProcessor;
 
-public class NotificationRequest extends AbstractJsonRpcRequest implements JsonRpcRequest<NotificationRequest> {
+public class NotificationRequest extends AbstractJsonRpcRequest implements JsonRpcRequest {
 
     public NotificationRequest() {
         super();

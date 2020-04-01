@@ -2,8 +2,8 @@ package leitner.card.services.mongo;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.UpdateOptions;
-import leitner.card.model.Card;
-import leitner.card.services.CardService;
+import leitner.card.api.model.Card;
+import leitner.card.api.services.CardService;
 import org.bson.Document;
 
 import java.util.Optional;
