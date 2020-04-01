@@ -78,7 +78,7 @@ public class ServiceFactory {
         private JsonRpcResponse invokeMethod(PositionalRequest jsonRpcRequest) throws Throwable {
             for (final NamedMethodHandle methodHandle : namedMethodHandles) {
                 if (methodHandle.methodName.equals(jsonRpcRequest.getMethodName())) {
-                    final Object result = methodHandle.invokeWithArguments(service, jsonRpcRequest.getParams());
+                    final Object result = methodHandle.invokeWithArguments(service, jsonRpcRequest.getParameters());
                     return SuccessResponse.createWithStringId(jsonRpcRequest.getId(), result);
                 }
             }
@@ -101,7 +101,7 @@ public class ServiceFactory {
         private JsonRpcResponse invokeMethod(NotificationRequest notificationRequest) throws Throwable {
             for (final NamedMethodHandle methodHandle : namedMethodHandles) {
                 if (methodHandle.methodName.equals(notificationRequest.getMethodName())) {
-                    final Object result = methodHandle.invokeWithArguments(service, notificationRequest.getParams());
+                    final Object result = methodHandle.invokeWithArguments(service, notificationRequest.getParameters());
                     if (result != null) {
                         LOGGER.warn("Result isn't null for notification request:[{}]", notificationRequest);
                     }

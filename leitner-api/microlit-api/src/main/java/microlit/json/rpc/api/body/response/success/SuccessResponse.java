@@ -2,10 +2,13 @@ package microlit.json.rpc.api.body.response.success;
 
 import microlit.json.rpc.api.body.AbstractJsonRpcBody;
 import microlit.json.rpc.api.body.JsonRpcIdSupplier;
+import microlit.json.rpc.api.body.response.AbstractIdentifiableResponse;
 import microlit.json.rpc.api.body.response.JsonRpcResponse;
 
-public class SuccessResponse extends AbstractJsonRpcBody implements JsonRpcResponse, JsonRpcIdSupplier {
-    private String id;
+import javax.json.bind.annotation.JsonbProperty;
+
+public class SuccessResponse extends AbstractIdentifiableResponse implements JsonRpcResponse, JsonRpcIdSupplier {
+    @JsonbProperty("result")
     private Object result;
 
     public SuccessResponse() {
@@ -13,13 +16,8 @@ public class SuccessResponse extends AbstractJsonRpcBody implements JsonRpcRespo
     }
 
     private SuccessResponse(String id, Object result) {
-        super();
-        this.id = id;
+        super(id);
         this.result = result;
-    }
-
-    public Object getResult() {
-        return result;
     }
 
     public static SuccessResponse createWithStringId(String id, Object result) {
@@ -34,17 +32,8 @@ public class SuccessResponse extends AbstractJsonRpcBody implements JsonRpcRespo
         return new SuccessResponse(JSON_RPC_NULL_ID, result);
     }
 
-    @Override
-    public String toString() {
-        return "SuccessResponseBody{" +
-                " jsonrpc='" + jsonrpc + '\'' +
-                ", id='" + id + '\'' +
-                ", result=" + result +
-                '}';
+    public Object getResult() {
+        return result;
     }
 
-    @Override
-    public String getId() {
-        return id;
-    }
 }

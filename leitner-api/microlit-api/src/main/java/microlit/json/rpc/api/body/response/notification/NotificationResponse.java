@@ -4,15 +4,15 @@ import microlit.json.rpc.api.body.AbstractJsonRpcBody;
 import microlit.json.rpc.api.body.response.JsonRpcResponse;
 
 public class NotificationResponse extends AbstractJsonRpcBody implements JsonRpcResponse {
-    private String method;
+    private String methodName;
 
     public NotificationResponse() {
         super();
     }
 
-    private NotificationResponse(String method) {
+    private NotificationResponse(String methodName) {
         super();
-        this.method = method;
+        this.methodName = methodName;
     }
 
     public static NotificationResponse create(String method) {
@@ -20,14 +20,14 @@ public class NotificationResponse extends AbstractJsonRpcBody implements JsonRpc
     }
 
     public String getMethodName() {
-        return method;
+        return methodName;
     }
 
     @Override
     public String toString() {
         return "NotificationResponse{" +
-                " jsonrpc='" + jsonrpc + '\'' +
-                ", method='" + method + '\'' +
+                " jsonrpc='" + jsonRpcProtocolVersion + '\'' +
+                ", method='" + methodName + '\'' +
                 '}';
     }
 }

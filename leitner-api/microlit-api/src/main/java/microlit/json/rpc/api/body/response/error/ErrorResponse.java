@@ -1,31 +1,22 @@
 package microlit.json.rpc.api.body.response.error;
 
-import microlit.json.rpc.api.body.AbstractJsonRpcBody;
 import microlit.json.rpc.api.body.JsonRpcIdSupplier;
+import microlit.json.rpc.api.body.response.AbstractIdentifiableResponse;
 import microlit.json.rpc.api.body.response.JsonRpcResponse;
 
-public class ErrorResponse extends AbstractJsonRpcBody implements JsonRpcResponse, JsonRpcIdSupplier {
-    private int code;
-    private String message;
-    private String id;
+import javax.json.bind.annotation.JsonbProperty;
+
+public class ErrorResponse extends AbstractIdentifiableResponse implements JsonRpcResponse, JsonRpcIdSupplier {
+    @JsonbProperty("error")
+    private JsonRpcError jsonRpcError;
 
     public ErrorResponse() {
         super();
     }
 
     private ErrorResponse(String id, int code, String message) {
-        super();
-        this.id = id;
-        this.code = code;
-        this.message = message;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
+        super(id);
+        this.jsonRpcError = new JsonRpcError(code, message);
     }
 
     public static ErrorResponse createWithStringId(String id, int code, String message) {
@@ -40,18 +31,15 @@ public class ErrorResponse extends AbstractJsonRpcBody implements JsonRpcRespons
         return new ErrorResponse(JSON_RPC_NULL_ID, code, message);
     }
 
-    @Override
-    public String toString() {
-        return "ErrorResponseBody{" +
-                "code=" + code +
-                ", message='" + message + '\'' +
-                ", jsonrpc='" + jsonrpc + '\'' +
-                ", id='" + id + '\'' +
-                '}';
+    public JsonRpcError getJsonRpcError() {
+        return jsonRpcError;
     }
 
     @Override
-    public String getId() {
-        return id;
+    public String toString() {
+        return "ErrorResponse{" +
+                "jsonRpcError=" + jsonRpcError +
+                ", jsonRpcProtocolVersion='" + jsonRpcProtocolVersion + '\'' +
+                '}';
     }
 }

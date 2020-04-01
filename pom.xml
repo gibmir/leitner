@@ -25,6 +25,9 @@
         <amqp-client.version>5.8.0</amqp-client.version>
         <logback-classic.version>1.2.3</logback-classic.version>
         <mongo-java-driver.version>3.12.1</mongo-java-driver.version>
+        <javax.json.bind-api.version>1.0</javax.json.bind-api.version>
+        <yasson.version>1.0.6</yasson.version>
+        <javax.json.version>1.1.4</javax.json.version>
     </properties>
     <packaging>pom</packaging>
     <build>
@@ -115,6 +118,21 @@
                 <groupId>leitner</groupId>
                 <artifactId>microlit-api</artifactId>
                 <version>0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.json.bind</groupId>
+                <artifactId>javax.json.bind-api</artifactId>
+                <version>${javax.json.bind-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse</groupId>
+                <artifactId>yasson</artifactId>
+                <version>${yasson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>javax.json</artifactId>
+                <version>${javax.json.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

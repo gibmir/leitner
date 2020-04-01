@@ -1,33 +1,21 @@
 package microlit.json.rpc.api.body.request.positional;
 
-import microlit.json.rpc.api.body.AbstractJsonRpcBody;
 import microlit.json.rpc.api.body.JsonRpcIdSupplier;
+import microlit.json.rpc.api.body.request.AbstractJsonRpcRequest;
 import microlit.json.rpc.api.body.request.JsonRpcRequest;
 import microlit.json.rpc.api.body.response.JsonRpcResponse;
 import microlit.json.rpc.api.processor.JsonRpcRequestProcessor;
 
-public class PositionalRequest extends AbstractJsonRpcBody implements JsonRpcRequest<PositionalRequest>, JsonRpcIdSupplier {
-    private String method;
-    private Object[] params;
+public class PositionalRequest extends AbstractJsonRpcRequest implements JsonRpcRequest<PositionalRequest>, JsonRpcIdSupplier {
     private String id;
 
     public PositionalRequest() {
         super();
     }
 
-    private PositionalRequest(String id, String method, Object[] params) {
-        super();
+    private PositionalRequest(String id, String methodName, Object[] parameters) {
+        super(methodName, parameters);
         this.id = id;
-        this.method = method;
-        this.params = params;
-    }
-
-    public String getMethodName() {
-        return method;
-    }
-
-    public Object[] getParams() {
-        return params;
     }
 
     public static PositionalRequest createWithStringId(String id, String method, Object[] params) {
