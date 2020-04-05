@@ -28,6 +28,7 @@
         <javax.json.bind-api.version>1.0</javax.json.bind-api.version>
         <yasson.version>1.0.6</yasson.version>
         <javax.json.version>1.1.4</javax.json.version>
+        <consul-client.version>1.4.0</consul-client.version>
     </properties>
     <packaging>pom</packaging>
     <build>
@@ -116,7 +117,7 @@
             </dependency>
             <dependency>
                 <groupId>leitner</groupId>
-                <artifactId>microlit-api</artifactId>
+                <artifactId>microlit</artifactId>
                 <version>0.1</version>
             </dependency>
             <dependency>
@@ -138,6 +139,11 @@
                 <groupId>leitner</groupId>
                 <artifactId>leitner-card-api</artifactId>
                 <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.orbitz.consul</groupId>
+                <artifactId>consul-client</artifactId>
+                <version>${consul-client.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -6,8 +6,6 @@ import leitner.card.api.model.Card;
 import leitner.card.api.services.CardService;
 import org.bson.Document;
 
-import java.util.Optional;
-
 public class MongoCardService implements CardService {
     private final MongoCollection<Document> cards;
 
@@ -16,10 +14,14 @@ public class MongoCardService implements CardService {
     }
 
     @Override
-    public Optional<Card> getCardBy(Long id) {
+    public Card getCardBy(Long id) {
         final Document searchQuery = MongoCardAdapter.searchById(id);
-        return Optional.ofNullable(cards.find(searchQuery).first())
-                .map(MongoCardAdapter::fromDocument);
+        final Document first = cards.find(searchQuery).first();
+        if (first != null) {
+            return MongoCardAdapter.fromDocument(first);
+        } else {
+            return null;
+        }
     }
 
     @Override

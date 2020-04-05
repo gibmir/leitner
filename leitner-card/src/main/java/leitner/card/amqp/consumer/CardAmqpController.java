@@ -5,6 +5,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 import microlit.json.rpc.api.body.request.JsonRpcRequest;
+import microlit.json.rpc.api.body.request.positional.PositionalRequest;
 import microlit.json.rpc.api.body.response.JsonRpcResponse;
 import microlit.json.rpc.api.processor.JsonRpcRequestProcessor;
 import microlit.json.rpc.api.processor.JsonRpcResponseProcessor;
@@ -29,8 +30,8 @@ public class CardAmqpController extends DefaultConsumer {
     public void handleDelivery(String consumerTag,
                                Envelope envelope,
                                AMQP.BasicProperties properties,
-                               byte[] body) throws IOException {
-        final JsonRpcRequest jsonRpcRequest = jsonRpcSerializer.deserializeRequest(body);
+                               byte[] body) {
+        final JsonRpcRequest jsonRpcRequest = jsonRpcSerializer.deserializeRequest(body, PositionalRequest.class);
         final JsonRpcResponse jsonRpcResponse = jsonRpcRequest.processWith(jsonRpcRequestProcessor);
         jsonRpcResponse.processWith(jsonRpcResponseProcessor);
     }

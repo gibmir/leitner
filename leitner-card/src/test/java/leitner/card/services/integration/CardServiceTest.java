@@ -8,10 +8,14 @@ import leitner.card.api.services.CardService;
 import leitner.card.services.integration.containers.MongoDbContainer;
 import leitner.card.services.mongo.MongoCardAdapter;
 import leitner.card.services.mongo.MongoCardService;
+import microlit.json.rpc.api.body.request.positional.PositionalRequest;
+import microlit.json.rpc.api.body.response.JsonRpcResponse;
+import microlit.json.rpc.api.body.response.error.ErrorResponse;
+import microlit.json.rpc.api.body.response.success.SuccessResponse;
+import microlit.json.rpc.api.processor.JsonRpcRequestProcessor;
+import microlit.json.rpc.api.processor.factory.JsonRpcRequestProcessorFactory;
 import org.bson.Document;
 import org.junit.jupiter.api.*;
-
-import java.util.Optional;
 
 import static leitner.card.services.integration.containers.MongoDbContainer.DEFAULT_MONGO_PORT;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,12 +25,20 @@ public class CardServiceTest {
 
     public static final String EXPECTED_QUESTION = "year";
     public static final String EXPECTED_ANSWER = "2020";
+    public static final long SECOND_ID = 2L;
     private static CardService cardService;
     public static final long ID = 1L;
     private static MongoDbContainer mongoDbContainer;
+    public static final PositionalRequest GET_REQUEST = PositionalRequest
+            .createWithStringId("axsdwq123dsa", "getCardBy", new Object[]{ID});
+    public static final PositionalRequest EMPTY_GET_REQUEST = PositionalRequest
+            .createWithStringId("asdsd", "getCardBy", new Object[]{33L});
+    public static final PositionalRequest INCORRECT_GET_REQUEST = PositionalRequest
+            .createWithStringId("asdsd", "getCardBy", new Object[]{});
+    private static JsonRpcRequestProcessor processor;
 
     @BeforeAll
-    static void beforeAll() {
+    static void beforeAll() throws NoSuchMethodException, IllegalAccessException {
         mongoDbContainer = new MongoDbContainer();
         mongoDbContainer.withExposedPorts(DEFAULT_MONGO_PORT);
         mongoDbContainer.start();
@@ -36,14 +48,14 @@ public class CardServiceTest {
         final Card card = new Card(ID, EXPECTED_QUESTION, EXPECTED_ANSWER);
         cards.insertOne(MongoCardAdapter.toDocument(card));
         cardService = new MongoCardService(cards);
+        processor = JsonRpcRequestProcessorFactory.createProcessor(CardService.class, cardService);
     }
 
     @Test
     @Order(1)
     void testGetCardById() {
-        Optional<Card> optionalCard = cardService.getCardBy(ID);
-        assertTrue(optionalCard.isPresent());
-        Card card = optionalCard.get();
+        Card card = cardService.getCardBy(ID);
+        assertNotNull(card);
         assertEquals(ID, card.getId());
         assertEquals(EXPECTED_QUESTION, card.getQuestion());
         assertEquals(EXPECTED_ANSWER, card.getAnswer());
@@ -52,33 +64,41 @@ public class CardServiceTest {
     @Test
     @Order(2)
     void testSaveCard() {
-        long id = 2L;
-        final Card card = new Card(id, "sky color", "blue");
+        final Card card = new Card(SECOND_ID, "sky color", "blue");
         assertDoesNotThrow(() -> cardService.save(card));
-        assertTrue(cardService.getCardBy(id).isPresent());
+        assertNotNull(cardService.getCardBy(SECOND_ID));
     }
 
     @Test
     @Order(3)
     void testUpdateCard() {
-        Optional<Card> optionalCard = cardService.getCardBy(ID);
-        assertTrue(optionalCard.isPresent());
-        Card card = optionalCard.get();
+        Card card = cardService.getCardBy(ID);
+        assertNotNull(card);
         String updatedAnswer = "2019";
         card.setAnswer(updatedAnswer);
         assertDoesNotThrow(() -> cardService.save(card));
-        Optional<Card> updatedOptionalCard = cardService.getCardBy(ID);
-        assertTrue(updatedOptionalCard.isPresent());
-        Card updatedCard = updatedOptionalCard.get();
+        Card updatedCard = cardService.getCardBy(ID);
+        assertNotNull(updatedCard);
         assertEquals(updatedAnswer, updatedCard.getAnswer());
     }
 
     @Test
     @Order(4)
     void testDeleteCard() {
-        assertTrue(cardService.getCardBy(ID).isPresent());
-        assertDoesNotThrow(() -> cardService.delete(ID));
-        assertFalse(cardService.getCardBy(ID).isPresent());
+        assertNotNull(cardService.getCardBy(SECOND_ID));
+        assertDoesNotThrow(() -> cardService.delete(SECOND_ID));
+        assertNull(cardService.getCardBy(SECOND_ID));
+    }
+
+    @Test
+    @Order(5)
+    void testJsonRpc() {
+        final JsonRpcResponse success = processor.process(GET_REQUEST);
+        assertTrue(success instanceof SuccessResponse);
+        final JsonRpcResponse emptySuccess = processor.process(EMPTY_GET_REQUEST);
+        assertTrue(emptySuccess instanceof SuccessResponse);
+        final JsonRpcResponse error = processor.process(INCORRECT_GET_REQUEST);
+        assertTrue(error instanceof ErrorResponse);
     }
 
     @AfterAll

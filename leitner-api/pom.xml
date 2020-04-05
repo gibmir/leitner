@@ -11,7 +11,7 @@
     <artifactId>leitner-api</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>microlit-api</module>
+        <module>microlit</module>
         <module>leitner-card-api</module>
     </modules>
 </project>
