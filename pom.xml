@@ -21,7 +21,7 @@
         <junit-jupiter.version>5.6.0</junit-jupiter.version>
         <c3p0.version>0.9.5.5</c3p0.version>
         <testcontainers.version>1.13.0</testcontainers.version>
-        <h2.version>1.4.200</h2.version>
+        <h2.version>2.0.206</h2.version>
         <amqp-client.version>5.8.0</amqp-client.version>
         <logback-classic.version>1.2.3</logback-classic.version>
         <mongo-java-driver.version>3.12.1</mongo-java-driver.version>
