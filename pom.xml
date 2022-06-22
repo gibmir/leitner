@@ -24,7 +24,7 @@
         <h2.version>1.4.200</h2.version>
         <amqp-client.version>5.8.0</amqp-client.version>
         <logback-classic.version>1.2.3</logback-classic.version>
-        <mongo-java-driver.version>3.12.1</mongo-java-driver.version>
+        <mongo-java-driver.version>3.12.8</mongo-java-driver.version>
         <javax.json.bind-api.version>1.0</javax.json.bind-api.version>
         <yasson.version>1.0.6</yasson.version>
         <javax.json.version>1.1.4</javax.json.version>
